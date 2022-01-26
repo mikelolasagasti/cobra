@@ -5,10 +5,6 @@ ifeq (, $(shell which golangci-lint))
 $(warning "could not find golangci-lint in $(PATH), run: curl -sfL https://install.goreleaser.com/github.com/golangci/golangci-lint.sh | sh")
 endif
 
-ifeq (, $(shell which richgo))
-$(warning "could not find richgo in $(PATH), run: go get github.com/kyoh86/richgo")
-endif
-
 .PHONY: fmt lint test cobra_generator install_deps clean
 
 default: all
@@ -25,7 +21,7 @@ lint:
 
 test: install_deps
 	$(info ******************** running tests ********************)
-	richgo test -v ./...
+	go test -v ./...
 
 cobra_generator: install_deps
 	$(info ******************** building generator ********************)
